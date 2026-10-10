@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Car Rental Booking Management — try the live demo</title>
+<meta name="description" content="Bookings, availability calendar, fleet, customers, invoices and reports for car rental and self-drive businesses. Try the live demo. ₱5,000 one-time, lifetime access.">
+<link rel="canonical" href="https://homearvin.github.io/CAR.RENTAL.BOOKING.MANAGEMENT/">
+<meta property="og:title" content="Car Rental Booking Management — try the live demo">
+<meta property="og:description" content="Every booking, car and peso in one place. For car rental and self-drive businesses. ₱5,000 one-time, lifetime access.">
+<meta property="og:image" content="https://homearvin.github.io/CAR.RENTAL.BOOKING.MANAGEMENT/images/overview.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230e4a42'/%3E%3Cpath d='M8 20v-5l2.4-5.2A2 2 0 0 1 12.2 8.6h7.6a2 2 0 0 1 1.8 1.2L24 15v5M8 15h16' fill='none' stroke='%23d8f27a' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='11.5' cy='20.5' r='2' fill='%23d8f27a'/%3E%3Ccircle cx='20.5' cy='20.5' r='2' fill='%23d8f27a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#0e4a42; --green-deep:#0a3832; --green-2:#13665b; --lime:#d8f27a; --lime-deep:#c5e35a; --lime-soft:#f3f9dc;
+    --ink:#10201d; --ink-2:#344541; --muted:#5d6f6a; --faint:#8b9b96; --line:#e1e8e4;
+    --ground:#f3f6f2; --card:#fff; --amber:#9a6a00; --amber-soft:#fff6df;
+    --radius:20px; --shadow:0 1px 2px rgba(10,40,35,.05),0 12px 32px rgba(10,40,35,.08);
+    --font:"Manrope","Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0; font-family:var(--font); color:var(--ink); background:var(--ground); line-height:1.6; -webkit-font-smoothing:antialiased}
+  body.locked{overflow:hidden}
+  h1,h2,h3{margin:0; color:var(--green); letter-spacing:-.025em; line-height:1.12}
+  h1{font-size:clamp(34px,4.4vw,56px); font-weight:800}
+  h2{font-size:clamp(27px,3vw,40px); font-weight:800}
+  h3{font-size:18.5px; font-weight:800}
+  p{margin:0}
+  a{color:var(--green-2)}
+  img{max-width:100%}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 20px}
+  section{padding:80px 0 0}
+  .eyebrow{font-size:12.5px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--green-2)}
+  .lead{color:var(--muted); font-size:clamp(16px,1vw+13px,18.5px)}
+  .center{text-align:center}
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:9px; font:inherit; font-weight:800; font-size:15.5px;
+    padding:14px 22px; border-radius:99px; border:1.5px solid transparent; text-decoration:none; cursor:pointer; line-height:1.2}
+  .btn svg{width:19px; height:19px; flex:none}
+  .btn.primary{background:var(--lime); color:var(--green-deep); box-shadow:0 8px 22px rgba(150,190,40,.35)}
+  .btn.primary:hover{background:var(--lime-deep)}
+  .btn.dark{background:var(--green); color:#fff}
+  .btn.dark:hover{background:var(--green-deep)}
+  .btn.ghost{background:#fff; color:var(--green); border-color:var(--line)}
+  .btn.ghost:hover{border-color:var(--green-2)}
+  .btn.sm{font-size:14px; padding:10px 17px}
+  .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow)}
+
+  header.top{position:sticky; top:0; z-index:20; background:rgba(243,246,242,.9); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+  header.top .wrap{display:flex; align-items:center; gap:22px; height:70px}
+  .brand{display:flex; align-items:center; gap:11px; font-weight:800; font-size:17.5px; color:var(--green); text-decoration:none; letter-spacing:-.02em; line-height:1.2; min-width:0}
+  .brand .mark{display:grid; place-items:center; flex:none; width:40px; height:40px; border-radius:12px; background:var(--green); color:var(--lime)}
+  .brand .mark svg{width:24px; height:24px}
+  .brand small{display:block; font-size:11.5px; font-weight:600; color:var(--muted); letter-spacing:.01em}
+  nav.main{display:flex; gap:22px; margin-left:auto}
+  nav.main a{color:var(--muted); text-decoration:none; font-weight:700; font-size:14.5px}
+  nav.main a:hover{color:var(--green)}
+
+  .hero{display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:46px; align-items:center; padding-top:60px}
+  .hero h1{margin-top:14px}
+  .hero .lead{margin-top:16px; max-width:520px}
+  .hero-cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:28px}
+  .facts{margin-top:14px; font-size:13.5px; color:var(--muted)}
+  .shot{width:100%; height:auto; border-radius:18px; display:block; box-shadow:0 2px 6px rgba(10,40,35,.08),0 30px 60px rgba(10,40,35,.16)}
+  .shot-frame{position:relative}
+  .live-chip{position:absolute; left:18px; bottom:-16px; display:inline-flex; align-items:center; gap:8px; background:var(--green); color:#fff;
+    font-size:13px; font-weight:800; padding:9px 15px; border-radius:99px; box-shadow:var(--shadow); text-decoration:none}
+  .live-chip i{width:9px; height:9px; border-radius:50%; background:var(--lime); box-shadow:0 0 0 0 rgba(216,242,122,.7); animation:ping 1.8s infinite}
+  .trust{display:flex; flex-wrap:wrap; gap:14px 22px; margin-top:26px}
+  .trust span{display:flex; align-items:center; gap:8px; font-size:14px; color:var(--ink-2); font-weight:700}
+  .trust svg{width:18px; height:18px; color:var(--green-2)}
+
+  .strip{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:64px}
+  .strip div{padding:18px 20px}
+  .strip b{display:block; font-size:23px; font-weight:800; color:var(--green); letter-spacing:-.02em}
+  .strip span{font-size:13.5px; color:var(--muted)}
+
+  .features{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:36px}
+  .feature{padding:24px}
+  .feature .ic{display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:var(--lime-soft); color:var(--green); margin-bottom:14px}
+  .feature .ic svg{width:22px; height:22px}
+  .feature p{margin-top:8px; color:var(--muted); font-size:14.5px}
+
+  .tour{display:grid; grid-template-columns:minmax(0,.42fr) minmax(0,1fr); gap:28px; margin-top:36px; align-items:start}
+  .tour-steps{display:grid; gap:8px}
+  .tour-steps button{display:flex; gap:12px; align-items:flex-start; text-align:left; font:inherit; border:1.5px solid transparent; background:#fff; border-radius:14px; padding:12px 14px; cursor:pointer; color:var(--ink-2); box-shadow:0 1px 2px rgba(10,40,35,.05)}
+  .tour-steps button b{display:block; font-size:15px; color:var(--green)}
+  .tour-steps button small{display:block; font-size:13px; color:var(--muted); line-height:1.45; margin-top:2px}
+  .tour-steps button i{flex:none; display:grid; place-items:center; width:28px; height:28px; border-radius:9px; background:var(--ground); color:var(--green); font-style:normal; font-weight:800; font-size:13px}
+  .tour-steps button[aria-selected="true"]{border-color:var(--green-2); background:var(--lime-soft)}
+  .tour-steps button[aria-selected="true"] i{background:var(--green); color:var(--lime)}
+  .tour-steps button:not([aria-selected="true"]) small{display:none}
+  .tour-view{position:sticky; top:96px}
+  .tour-view figcaption{margin-top:14px; font-size:14px; color:var(--muted); text-align:center}
+
+  .plan-row{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:18px; margin-top:36px; align-items:stretch}
+  .plan{position:relative; padding:32px; background:var(--green); color:#e4f1ec; border-radius:var(--radius); box-shadow:var(--shadow)}
+  .plan .tag{display:inline-block; background:var(--lime); color:var(--green-deep); font-size:12px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; padding:6px 13px; border-radius:99px}
+  .plan h3{color:#fff; margin-top:14px; font-size:24px}
+  .price{margin-top:8px; display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
+  .price b{font-size:48px; font-weight:800; color:var(--lime); letter-spacing:-.03em; line-height:1}
+  .price span{color:#bfd9d1; font-size:15px; font-weight:600}
+  .plan ul{list-style:none; padding:0; margin:22px 0 26px; display:grid; gap:10px; font-size:15px}
+  .plan li{display:flex; gap:10px} .plan li svg{flex:none; width:19px; height:19px; margin-top:3px; color:var(--lime)}
+  .plan .hero-cta{margin-top:0}
+  .plan .btn.ghost{background:transparent; color:#fff; border-color:rgba(255,255,255,.35)}
+  .side{padding:28px}
+  .side ol{margin:14px 0 0; padding-left:20px; color:var(--ink-2); display:grid; gap:10px; font-size:15px}
+  .pay{display:flex; align-items:center; gap:12px; padding:11px 0; border-top:1px solid var(--line)}
+  .pay:first-of-type{border-top:0}
+  .pay .pm{width:58px; height:34px; border-radius:9px; display:grid; place-items:center; color:#fff; font-weight:800; font-size:12px; flex:none}
+  .pm.gcash{background:#0a6cff} .pm.maya{background:#00b464} .pm.bank{background:#b4232c}
+  .pay .info{flex:1; min-width:0} .pay .info b{display:block; font-size:14.5px} .pay .info small{color:var(--muted)}
+  .pay .num{font-weight:800; font-variant-numeric:tabular-nums; white-space:nowrap}
+
+  .faq{max-width:820px; margin:30px auto 0}
+  .faq details{border-bottom:1px solid var(--line)}
+  .faq summary{cursor:pointer; font-weight:800; font-size:16px; padding:18px 0; list-style:none; display:flex; justify-content:space-between; gap:14px; color:var(--green)}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+"; color:var(--green-2); font-weight:800; font-size:20px; line-height:1}
+  .faq details[open] summary::after{content:"–"}
+  .faq p{padding:0 0 18px; color:var(--muted); font-size:15px}
+
+  .family{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:30px}
+  .sister{display:flex; align-items:center; gap:18px; padding:24px; border-radius:var(--radius); box-shadow:var(--shadow); text-decoration:none}
+  .sister .logo{display:grid; place-items:center; flex:none; width:54px; height:54px; border-radius:15px; background:#fff}
+  .sister h3{color:#fff; font-size:18px}
+  .sister p{margin-top:4px; font-size:14px}
+  .sister .go{margin-left:auto; flex:none; display:grid; place-items:center; width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,.16); color:#fff}
+  .sister .go svg{width:18px; height:18px}
+  .sister.dtr{background:linear-gradient(135deg,#16324f,#2563eb)} .sister.dtr p{color:#d6e4ff}
+  .sister.qc{background:linear-gradient(135deg,#0f4b47,#13756d)} .sister.qc p{color:#c9f2ea}
+  .sister:hover .go{background:rgba(255,255,255,.28)}
+
+  footer{border-top:1px solid var(--line); margin-top:80px; padding:30px 0 110px; color:var(--muted); font-size:13.5px}
+  footer .wrap{display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px}
+  footer a{color:var(--muted)}
+
+  /* ---------- Demo pop-up + floating button ---------- */
+  .demo-pop{position:fixed; inset:0; z-index:50; display:grid; place-items:center; padding:16px; background:rgba(6,30,26,.55); backdrop-filter:blur(3px);
+    opacity:0; visibility:hidden; transition:opacity .25s, visibility .25s}
+  .demo-pop.open{opacity:1; visibility:visible}
+  .demo-box{position:relative; width:min(720px,100%); max-height:calc(100vh - 32px); overflow:auto; background:#fff; border-radius:24px;
+    box-shadow:0 30px 80px rgba(0,0,0,.35); display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);
+    transform:translateY(18px) scale(.98); transition:transform .3s}
+  .demo-pop.open .demo-box{transform:none}
+  .demo-side{background:var(--green); color:#d6ebe4; padding:26px 22px; display:flex; flex-direction:column; gap:14px; border-radius:24px 0 0 24px}
+  .demo-side .ad{align-self:flex-start; font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--green-deep); background:var(--lime); padding:5px 10px; border-radius:99px}
+  .demo-side h3{color:#fff; font-size:22px}
+  .demo-side img{border-radius:12px; display:block; width:100%; height:auto; box-shadow:0 10px 24px rgba(0,0,0,.25)}
+  .demo-side p{font-size:13.5px}
+  .demo-main{padding:26px 26px 22px}
+  .demo-main h2{font-size:24px}
+  .demo-main .sub{color:var(--muted); font-size:14px; margin-top:4px}
+  .notes{list-style:none; padding:0; margin:16px 0 18px; display:grid; gap:12px}
+  .notes li{display:flex; gap:12px; font-size:14.5px; color:var(--ink-2); line-height:1.5}
+  .notes li i{flex:none; display:grid; place-items:center; width:26px; height:26px; border-radius:8px; background:var(--lime-soft); color:var(--green); font-style:normal; font-weight:800; font-size:13px}
+  .notes q{font-style:italic; quotes:"“" "”"}
+  .demo-main .btn{width:100%}
+  .demo-main .small{margin-top:10px; text-align:center; font-size:12.5px; color:var(--faint)}
+  .later{display:block; margin:6px auto 0; font:inherit; font-size:13.5px; font-weight:700; color:var(--muted); background:none; border:0; cursor:pointer; padding:6px 10px}
+  .x{position:absolute; top:12px; right:12px; width:36px; height:36px; border-radius:50%; border:0; background:var(--ground); color:var(--ink-2); cursor:pointer; display:grid; place-items:center}
+  .x svg{width:18px; height:18px}
+
+  .demo-float{position:fixed; right:20px; bottom:20px; z-index:40; display:flex; align-items:center; gap:12px; padding:10px 18px 10px 10px;
+    background:var(--green); color:#fff; border-radius:99px; text-decoration:none; box-shadow:0 14px 34px rgba(6,30,26,.35);
+    transform:translateY(140%); transition:transform .35s cubic-bezier(.2,.9,.3,1.2)}
+  .demo-float.show{transform:none}
+  .demo-float .pulse{position:relative; display:grid; place-items:center; width:40px; height:40px; border-radius:50%; background:var(--lime); color:var(--green-deep); flex:none}
+  .demo-float .pulse::after{content:""; position:absolute; inset:0; border-radius:50%; animation:ping 1.8s infinite}
+  .demo-float .pulse svg{width:20px; height:20px}
+  .demo-float b{display:block; font-size:15px; line-height:1.2}
+  .demo-float small{display:block; font-size:12px; color:#bfd9d1; line-height:1.2}
+  @keyframes ping{0%{box-shadow:0 0 0 0 rgba(216,242,122,.75)} 80%,100%{box-shadow:0 0 0 14px rgba(216,242,122,0)}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+
+  @media (max-width:900px){
+    nav.main{display:none}
+    header.top .btn{display:none}
+    .hero,.plan-row,.tour{grid-template-columns:minmax(0,1fr)}
+    .tour-view{position:static; order:-1}
+    .strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .features,.family{grid-template-columns:minmax(0,1fr)}
+    .demo-box{grid-template-columns:minmax(0,1fr)}
+    .demo-side{border-radius:24px 24px 0 0; padding:20px}
+    .demo-side img,.demo-side p{display:none}
+  }
+  @media (max-width:520px){
+    .wrap{padding:0 16px}
+    .brand{font-size:15.5px}
+    .demo-float{left:16px; right:16px; bottom:14px; justify-content:flex-start}
+    .demo-main{padding:22px 18px 18px}
+    .pay .num{font-size:14px}
+  }
+</style>
+</head>
+<body id="top">
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg"><defs>
+  <symbol id="i-car" viewBox="0 0 24 24"><path d="M4 16.5V12l2.1-5A2 2 0 0 1 8 5.8h8a2 2 0 0 1 1.9 1.2L20 12v4.5M4 12h16M10 16.5h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7.5" cy="16.8" r="1.9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16.5" cy="16.8" r="1.9" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M9 4V3h6v1M8.5 10.5h7M8.5 14h7M8.5 17.5h4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M3.5 10h17M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><rect x="7" y="13" width="4" height="3.5" rx="1" fill="currentColor"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.5" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M3 20c.6-3.4 3-5.5 6-5.5s5.4 2.1 6 5.5M15.5 5.2a3.5 3.5 0 0 1 0 6.6M17.5 14.8c1.8.7 3 2.6 3.5 5.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="m7.5 14.5 3.5-4 3 2.5 5-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-brush" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2 0-1.6-1.5-1.8-1.5-3.2 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4C21 6.4 17 3 12 3z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><circle cx="7.5" cy="11" r="1.3" fill="currentColor"/><circle cx="10.5" cy="7" r="1.3" fill="currentColor"/><circle cx="15.5" cy="7.5" r="1.3" fill="currentColor"/></symbol>
+</defs></svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="mark"><svg><use href="#i-car"/></svg></span>
+      <span>Car Rental Booking Management<small>by AZ Digital Marketing</small></span></a>
+    <nav class="main" aria-label="Sections">
+      <a href="#features">Features</a>
+      <a href="#tour">Tour</a>
+      <a href="#price">Price</a>
+      <a href="#faq">Questions</a>
+    </nav>
+    <a class="btn primary sm js-demo" href="#demo"><svg><use href="#i-play"/></svg>Try the live demo</a>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <span class="eyebrow">For car rental &amp; self-drive businesses</span>
+      <h1>Every booking, car and peso in one place.</h1>
+      <p class="lead">Take bookings, see which cars are free, send invoices and know who still owes you. No more notebooks, group chats and double bookings.</p>
+      <div class="hero-cta">
+        <a class="btn primary js-demo" href="#demo"><svg><use href="#i-play"/></svg>Try the live demo</a>
+        <a class="btn ghost" href="#price">See the price</a>
+      </div>
+      <p class="facts">Free demo · no sign-up · opens in your web browser</p>
+      <div class="trust">
+        <span><svg><use href="#i-check"/></svg>No double bookings</span>
+        <span><svg><use href="#i-check"/></svg>Your business name &amp; logo</span>
+        <span><svg><use href="#i-check"/></svg>₱5,000 once, lifetime access</span>
+      </div>
+    </div>
+    <div class="shot-frame">
+      <img class="shot" src="images/overview.jpg" width="1440" height="900" alt="Overview screen: pickups and returns today, overdue rentals, active rentals, available vehicles and customer balances due">
+      <a class="live-chip js-demo" href="#demo"><i></i>Live demo · click to try</a>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="card"><b>1 screen</b><span>today's pickups, returns and balances</span></div>
+    <div class="card"><b>8 steps</b><span>guided tour inside the demo</span></div>
+    <div class="card"><b>₱0 monthly</b><span>one payment, lifetime access</span></div>
+    <div class="card"><b>Any browser</b><span>nothing to install</span></div>
+  </div>
+
+  <section id="features">
+    <div class="center">
+      <span class="eyebrow">What it does</span>
+      <h2 style="margin-top:8px">Run the whole rental business from one screen.</h2>
+      <p class="lead" style="margin:12px auto 0; max-width:660px">From the first inquiry to the car coming back, everything is recorded once and shows up everywhere it's needed.</p>
+    </div>
+    <div class="features">
+      <div class="card feature"><span class="ic"><svg><use href="#i-book"/></svg></span><h3>Bookings &amp; invoices</h3>
+        <p>Every reservation with its client, car, dates and payment status. Make a quotation, print the invoice, preview the email to the client.</p></div>
+      <div class="card feature"><span class="ic"><svg><use href="#i-cal"/></svg></span><h3>Availability calendar</h3>
+        <p>Each car has its own color. See the whole month, filter one car, and the system checks availability before a booking is made.</p></div>
+      <div class="card feature"><span class="ic"><svg><use href="#i-car"/></svg></span><h3>Your fleet at a glance</h3>
+        <p>Which cars are available, rented or in maintenance, per branch, with photos, plate numbers and how busy each car is.</p></div>
+      <div class="card feature"><span class="ic"><svg><use href="#i-users"/></svg></span><h3>Customers &amp; balances</h3>
+        <p>A customer list with contact details and rental history, and a clear list of who still has a balance to pay.</p></div>
+      <div class="card feature"><span class="ic"><svg><use href="#i-chart"/></svg></span><h3>Know how business is doing</h3>
+        <p>Revenue, money collected and still outstanding, a sales trend and your busiest cars, without adding anything up by hand.</p></div>
+      <div class="card feature"><span class="ic"><svg><use href="#i-brush"/></svg></span><h3>Made your own</h3>
+        <p>Your company name, tagline and logo on the screens and invoices, your invoice numbering, branches and rental settings.</p></div>
+    </div>
+  </section>
+
+  <section id="tour">
+    <div class="center">
+      <span class="eyebrow">A look inside</span>
+      <h2 style="margin-top:8px">What you'll see in the demo.</h2>
+      <p class="lead" style="margin:12px auto 0; max-width:660px">The demo is a sample rental business with made-up bookings. It walks you through these 8 steps.</p>
+    </div>
+    <div class="tour">
+      <div class="tour-steps" role="tablist" aria-label="Demo tour steps">
+        <button role="tab" aria-selected="true" data-img="images/overview.jpg" data-alt="Overview screen with today's pickups, returns, overdue rentals and balances"><i>1</i><span><b>Start with your day</b><small>Pickups, returns, available cars and the balances renters still owe.</small></span></button>
+        <button role="tab" aria-selected="false" data-img="images/bookings.jpg" data-alt="Bookings list with payment and booking status"><i>2</i><span><b>Explore a booking</b><small>Open a reservation, then preview its invoice or the email to the client.</small></span></button>
+        <button role="tab" aria-selected="false" data-img="images/calendar.jpg" data-alt="Calendar with a color for each vehicle"><i>3</i><span><b>See vehicle availability</b><small>A color for each car. Filter one car and still see the whole month.</small></span></button>
+        <button role="tab" aria-selected="false" data-img="images/vehicles.jpg" data-alt="Vehicles screen: available, rented, maintenance and utilization"><i>4</i><span><b>Meet the fleet</b><small>Photos, status and calendar color of every vehicle.</small></span></button>
+        <button role="tab" aria-selected="false" data-img="images/customers.jpg" data-alt="Customer directory with bookings and balances"><i>5</i><span><b>Know your customers</b><small>Search customers and see their rental history and balances.</small></span></button>
+        <button role="tab" aria-selected="false" data-img="images/reports.jpg" data-alt="Reports: revenue, collected, outstanding and sales trend"><i>6</i><span><b>Understand the business</b><small>Revenue, collections and how the business is performing.</small></span></button>
+        <button role="tab" aria-selected="false" data-img="images/new-booking.jpg" data-alt="New booking form: client, vehicle and dates, charges"><i>7</i><span><b>Try the booking form</b><small>Choose dates and a car to check availability before booking.</small></span></button>
+        <button role="tab" aria-selected="false" data-img="images/settings.jpg" data-alt="Settings: company name, tagline, logo and invoice numbering"><i>8</i><span><b>Make it your own</b><small>Your business name, logo, invoice numbers and settings.</small></span></button>
+      </div>
+      <figure class="tour-view" style="margin:0">
+        <img class="shot" id="tourImg" src="images/overview.jpg" width="1440" height="900" alt="Overview screen with today's pickups, returns, overdue rentals and balances">
+        <figcaption>Screens from the live demo. <a class="js-demo" href="#demo">Open it and click around yourself →</a></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="price">
+    <div class="center">
+      <span class="eyebrow">Price</span>
+      <h2 style="margin-top:8px">Pay once. Use it for good.</h2>
+    </div>
+    <div class="plan-row">
+      <div class="plan">
+        <span class="tag">Lifetime access</span>
+        <h3>Car Rental Booking Management</h3>
+        <div class="price"><b>₱5,000</b><span>one-time payment · no monthly fee</span></div>
+        <ul>
+          <li><svg><use href="#i-check"/></svg>Bookings, quotations, invoices and client emails</li>
+          <li><svg><use href="#i-check"/></svg>Availability calendar that guards against double bookings</li>
+          <li><svg><use href="#i-check"/></svg>Fleet, branches, customers and balances</li>
+          <li><svg><use href="#i-check"/></svg>Reports: revenue, collected and outstanding</li>
+          <li><svg><use href="#i-check"/></svg>Your company name, logo and invoice numbering</li>
+        </ul>
+        <div class="hero-cta">
+          <a class="btn primary js-demo" href="#demo"><svg><use href="#i-play"/></svg>Try the demo first</a>
+          <a class="btn ghost" href="#get">How to get it</a>
+        </div>
+      </div>
+      <div class="card side" id="get">
+        <h3>How to get it</h3>
+        <ol>
+          <li><a class="js-demo" href="#demo">Try the live demo</a> and see if it fits your business.</li>
+          <li>Message us your <b>business name</b>, <b>number of vehicles</b> and <b>branches</b>. We answer your questions.</li>
+          <li>Pay ₱5,000 with any option below and send a screenshot of the payment.</li>
+          <li>We set up your own copy with your business name and logo, and you start booking.</li>
+        </ol>
+        <div style="margin-top:18px">
+          <div class="pay"><span class="pm gcash">GCash</span><span class="info"><b>GCash</b><small>Send to this number</small></span><span class="num">0912 068 8399</span></div>
+          <div class="pay"><span class="pm maya">Maya</span><span class="info"><b>Maya</b><small>Send to this number</small></span><span class="num">0912 541 6934</span></div>
+          <div class="pay"><span class="pm bank">Bank</span><span class="info"><b>Bank transfer</b><small>BPI · AZ Digital Marketing</small></span><span class="num">2469270049</span></div>
+        </div>
+        <p style="margin-top:12px; font-size:14px; color:var(--muted)">Message us at
+          <a href="mailto:azmarketingservicesbicol@gmail.com">azmarketingservicesbicol@gmail.com</a> or
+          <a href="https://www.facebook.com/AZDigitalMarketingOfficial" target="_blank" rel="noopener">AZ Digital Marketing on Facebook</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="center">
+      <span class="eyebrow">Questions</span>
+      <h2 style="margin-top:8px">Before you try the demo.</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Is the demo a real business?</summary>
+        <p>No. It's a sample rental business with made-up clients and bookings. Click anything you like. Nothing you do is saved and nothing is downloaded.</p></details>
+      <details><summary>What is the Google notice at the top of the demo?</summary>
+        <p>The system runs on Google, so Google shows a small notice saying the app was made by a Google Apps Script user (in Filipino: "Ang application na ito ay ginawa ng Google Apps Script user"). That's normal. Close it with the × and continue.</p></details>
+      <details><summary>Do I need to install anything?</summary>
+        <p>No. It opens in the web browser (Chrome, Edge, Safari). A laptop gives the best view.</p></details>
+      <details><summary>Is ₱5,000 a monthly fee?</summary>
+        <p>No. You pay ₱5,000 once and have lifetime access. There is no monthly subscription.</p></details>
+      <details><summary>Will it show my business name instead of "DriveNest"?</summary>
+        <p>Yes. "DriveNest" is only the demo's sample business. Your copy shows your company name, tagline and logo on the screens and invoices.</p></details>
+      <details><summary>I have more questions.</summary>
+        <p>Message us at <a href="mailto:azmarketingservicesbicol@gmail.com">azmarketingservicesbicol@gmail.com</a> or on <a href="https://www.facebook.com/AZDigitalMarketingOfficial" target="_blank" rel="noopener">Facebook</a>. We're happy to walk you through it.</p></details>
+    </div>
+  </section>
+
+  <section style="padding-top:70px">
+    <div class="center">
+      <span class="eyebrow">Also from AZ Digital Marketing</span>
+    </div>
+    <div class="family">
+      <a class="sister dtr" href="https://homearvin.github.io/DTR.CONVERTER/">
+        <span class="logo"><svg viewBox="0 0 32 32" width="38" height="38"><rect width="32" height="32" rx="9" fill="#2563eb"/><path d="M11 7h7l4 4v14H11z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><path d="M14 16h5M14 19.5h5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span><h3>DTR Converter</h3><p>Biometric attendance file → ready-to-print CSC Form 48, for Admin Officers.</p></span>
+        <span class="go"><svg><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="sister qc" href="https://homearvin.github.io/QUICK.CHECK/">
+        <span class="logo"><svg viewBox="0 0 32 32" width="38" height="38"><rect width="32" height="32" rx="9" fill="#0f4b47"/><path d="M9 16.5l4.5 4.5L23 11" fill="none" stroke="#2fe0c4" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span><h3>QuickCheck</h3><p>Check a class of test papers from your phone, scores straight to the class record.</p></span>
+        <span class="go"><svg><use href="#i-arrow"/></svg></span>
+      </a>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Car Rental Booking Management · by AZ Digital Marketing</span>
+    <span>
+      <a href="mailto:azmarketingservicesbicol@gmail.com">azmarketingservicesbicol@gmail.com</a> ·
+      <a href="https://www.facebook.com/AZDigitalMarketingOfficial" target="_blank" rel="noopener">Facebook</a> ·
+      <a href="https://homearvin.github.io/DTR.CONVERTER/">DTR Converter</a> ·
+      <a href="https://homearvin.github.io/QUICK.CHECK/">QuickCheck</a>
+    </span>
+  </div>
+</footer>
+
+<!-- The demo pop-up: important notes first, then the link to the live demo. -->
+<div class="demo-pop" id="demoPop" role="dialog" aria-modal="true" aria-labelledby="demoTitle" aria-hidden="true">
+  <div class="demo-box">
+    <div class="demo-side">
+      <span class="ad">Free live demo</span>
+      <h3>See the system working, before you buy.</h3>
+      <img src="images/login.jpg" width="1440" height="900" alt="">
+      <p>A sample rental business with made-up bookings, cars and clients.</p>
+    </div>
+    <div class="demo-main">
+      <button class="x" type="button" data-close aria-label="Close"><svg><use href="#i-x"/></svg></button>
+      <h2 id="demoTitle">Before you open the demo</h2>
+      <p class="sub">4 quick things to know. It takes 20 seconds.</p>
+      <ul class="notes">
+        <li><i>1</i><span><b>Sample data only.</b> Click anything you like. Nothing is saved and nothing is downloaded.</span></li>
+        <li><i>2</i><span>Google shows a notice at the top: <q>This application was created by a Google Apps Script user</q> or <q>Ang application na ito ay ginawa ng Google Apps Script user</q>. That's normal. Just close it.</span></li>
+        <li><i>3</i><span>Click <b>Explore demo</b> and wait a few seconds for it to open.</span></li>
+        <li><i>4</i><span>Press <b>Next feature →</b> to follow the 8-step tour. Best on a laptop.</span></li>
+      </ul>
+      <a class="btn primary js-demo-go" href="https://script.google.com/macros/s/AKfycbxly540DMO28DgrkzoXkFv2r1mhYQ6f6lfw_IDe3_VJHpILkM9X5fT5cWHNnhfCfV6i/exec" target="_blank" rel="noopener">Open the live demo<svg><use href="#i-out"/></svg></a>
+      <p class="small">Opens in a new tab · free · no sign-up</p>
+      <button class="later" type="button" data-close>Maybe later</button>
+    </div>
+  </div>
+</div>
+
+<a class="demo-float js-demo" id="demoFloat" href="#demo" aria-label="Try the live demo">
+  <span class="pulse"><svg><use href="#i-play"/></svg></span>
+  <span><b>Try the live demo</b><small>Free · sample data · no sign-up</small></span>
+</a>
+
+<script>
+  // Demo pop-up: opens shortly after the page loads. When closed it shrinks to the floating
+  // button and opens again after a while, until the visitor actually opens the demo.
+  (function () {
+    var FIRST_OPEN_MS = 3000;   // first appearance after the page loads
+    var REOPEN_MS = 30000;      // comes back this long after being closed
+    var OPENED_KEY = 'demoOpened';
+
+    var pop = document.getElementById('demoPop');
+    var float = document.getElementById('demoFloat');
+    var goButton = pop.querySelector('.js-demo-go');
+    var timer = null;
+    var lastFocus = null;
+
+    function demoAlreadyOpened() {
+      try { return sessionStorage.getItem(OPENED_KEY) === '1'; } catch (e) { return false; }
+    }
+    function rememberDemoOpened() {
+      try { sessionStorage.setItem(OPENED_KEY, '1'); } catch (e) {}
+    }
+
+    function isOpen() { return pop.classList.contains('open'); }
+
+    function open() {
+      clearTimeout(timer);
+      if (isOpen()) return;
+      lastFocus = document.activeElement;
+      pop.classList.add('open');
+      pop.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('locked');
+      float.classList.remove('show');
+      goButton.focus({ preventScroll: true });
+    }
+
+    function close() {
+      if (!isOpen()) return;
+      pop.classList.remove('open');
+      pop.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('locked');
+      float.classList.add('show');
+      if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+      scheduleReopen(REOPEN_MS);
+    }
+
+    // Reopen only while the visitor is looking at the page; a hidden tab waits until it is shown again.
+    function scheduleReopen(ms) {
+      clearTimeout(timer);
+      if (demoAlreadyOpened()) return;
+      timer = setTimeout(function () {
+        if (document.visibilityState === 'visible') open();
+        else document.addEventListener('visibilitychange', function onShow() {
+          if (document.visibilityState !== 'visible') return;
+          document.removeEventListener('visibilitychange', onShow);
+          scheduleReopen(1500);
+        });
+      }, ms);
+    }
+
+    // Every "Try the demo" button shows the notes first.
+    document.querySelectorAll('.js-demo').forEach(function (a) {
+      a.addEventListener('click', function (e) { e.preventDefault(); open(); });
+    });
+    pop.querySelectorAll('[data-close]').forEach(function (b) { b.addEventListener('click', close); });
+    pop.addEventListener('click', function (e) { if (e.target === pop) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+
+    goButton.addEventListener('click', function () {
+      rememberDemoOpened();
+      clearTimeout(timer);
+      pop.classList.remove('open');
+      pop.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('locked');
+      float.classList.add('show');
+    });
+
+    if (demoAlreadyOpened()) float.classList.add('show');
+    else scheduleReopen(FIRST_OPEN_MS);
+  })();
+
+  // Tour: each step button shows its screenshot.
+  (function () {
+    var img = document.getElementById('tourImg');
+    var tabs = document.querySelectorAll('.tour-steps button');
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) { t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
+        img.src = tab.getAttribute('data-img');
+        img.alt = tab.getAttribute('data-alt');
+      });
+    });
+  })();
+</script>
+</body>
+</html>
