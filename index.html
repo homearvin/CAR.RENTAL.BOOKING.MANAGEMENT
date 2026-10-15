@@ -124,8 +124,9 @@
   .faq details[open] summary::after{content:"–"}
   .faq p{padding:0 0 18px; color:var(--muted); font-size:15px}
 
-  .family{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:30px}
-  .sister{display:flex; align-items:center; gap:18px; padding:24px; border-radius:var(--radius); box-shadow:var(--shadow); text-decoration:none}
+  .family{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:30px}
+  .sister{display:flex; flex-wrap:wrap; align-items:center; gap:16px 18px; padding:24px; border-radius:var(--radius); box-shadow:var(--shadow); text-decoration:none}
+  .sister > span:nth-child(2){order:3; flex-basis:100%}  /* logo and arrow on top, text underneath */
   .sister .logo{display:grid; place-items:center; flex:none; width:54px; height:54px; border-radius:15px; background:#fff}
   .sister h3{color:#fff; font-size:18px}
   .sister p{margin-top:4px; font-size:14px}
@@ -133,6 +134,7 @@
   .sister .go svg{width:18px; height:18px}
   .sister.dtr{background:linear-gradient(135deg,#16324f,#2563eb)} .sister.dtr p{color:#d6e4ff}
   .sister.qc{background:linear-gradient(135deg,#0f4b47,#13756d)} .sister.qc p{color:#c9f2ea}
+  .sister.pos{background:linear-gradient(135deg,#0f3a2b,#4f7d2e)} .sister.pos p{color:#d3e6cf}
   .sister:hover .go{background:rgba(255,255,255,.28)}
 
   footer{border-top:1px solid var(--line); margin-top:80px; padding:30px 0 110px; color:var(--muted); font-size:13.5px}
@@ -379,6 +381,11 @@
       <a class="sister qc" href="https://homearvin.github.io/QUICK.CHECK/">
         <span class="logo"><svg viewBox="0 0 32 32" width="38" height="38"><rect width="32" height="32" rx="9" fill="#0f4b47"/><path d="M9 16.5l4.5 4.5L23 11" fill="none" stroke="#2fe0c4" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span><h3>QuickCheck</h3><p>Check a class of test papers from your phone, scores straight to the class record.</p></span>
+        <span class="go"><svg><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="sister pos" href="https://homearvin.github.io/STORE.POS/">
+        <span class="logo"><svg viewBox="0 0 64 64" width="38" height="38"><rect width="64" height="64" rx="16" fill="#164c39"/><path d="M32 49V17M32 30c-10 0-13-7-13-12 8 0 13 5 13 12Zm0 10c-10 0-13-7-13-12 8 0 13 5 13 12Zm0-15c10 0 13-7 13-12-8 0-13 5-13 12Zm0 11c10 0 13-7 13-12-8 0-13 5-13 12Z" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg></span>
+        <span><h3>StorePOS</h3><p>Sales by kilo or sack, stocks, utang and cash count for rice and small stores.</p></span>
         <span class="go"><svg><use href="#i-arrow"/></svg></span>
       </a>
     </div>
